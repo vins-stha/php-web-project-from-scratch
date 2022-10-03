@@ -1,7 +1,10 @@
 <?php
+require "../Controller/FormController.php";
 if (isset($_POST['email'])) {
-  echo "posted";
+  $formHandler = new FormController();
+  $formHandler->addNewEmail($_POST);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -23,7 +26,7 @@ if (isset($_POST['email'])) {
 <body>
 <div class="container">
   <header>
-    <h1>Email Registration System </h1>
+    <h1><?=getenv('application_name')?></h1>
   </header>
   <section>
     <div id="container_demo">
@@ -37,8 +40,8 @@ if (isset($_POST['email'])) {
             <input id="email" type="email" class="input-box" name="email"/>
 
           </p>
-          <p class="login button">
-            <input type="submit" name="welcome" value="Logout"/>
+          <p class="button">
+            <input type="submit" name="welcome" value="Register"/>
           </p>
 
         </form>
@@ -56,26 +59,27 @@ if (isset($_POST['email'])) {
 
   }
 
-  $(document).ready(function () {
-    $("form").submit(function (event) {
-
-      event.preventDefault();
-
-      let formData = {
-        email: $("#email").val()
-      };
-      console.log('email=>', formData)
-      $.ajax({
-        type: "POST",
-        url: "index.php",
-        data: formData,
-        dataType: "json",
-        encode: true
-      })
-          .done(function (data) {
-            console.log('DAta=', data)
-          });
-    })
-
-  });
+  // $(document).ready(function ()
+  // {
+  //   $("form").submit(function (event) {
+  //
+  //     event.preventDefault();
+  //
+  //     let formData = {
+  //       email: $("#email").val()
+  //     };
+  //     console.log('email=>', formData)
+  //     $.ajax({
+  //       type: "POST",
+  //       url: "index.php",
+  //       data: formData,
+  //       dataType: "json",
+  //       encode: true
+  //     })
+  //         .done(function (data) {
+  //           console.log('DAta=', data)
+  //         });
+  //   })
+  //
+  // });
 </script>
