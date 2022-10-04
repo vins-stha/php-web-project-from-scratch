@@ -4,4 +4,5 @@
     define("DB_USER", 'root');
     define("DB_PASSWORD", '');
     define("DB_NAME",'clients');
+    define("TABLE_NAME", "emails")
 ?>

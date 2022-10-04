@@ -6,26 +6,55 @@ class DBConnect
 
   function __construct()
   {
-    // connect db
-    self::dbconnect();
   }
 
   public static function dbconnect()
   {
-    $dsn = "mysql:host=" . DB_HOST . ":" . DB_PORT . ";charset=UTF8";
     $db = DB_NAME;
 
     try {
-      $dbconnect = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
-      if ($dbconnect) {
-        if (!$dbconnect->query("USE $db")) {
-          if (!$dbconnect->query("CREATE DATABASE $db")) {
-            throw new Exception("Could not create database.");
+      $dbconnect = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
+
+      if (mysqli_connect_errno()) {
+        error_log('Connection error: ' . $dbconnect->connect_errno);
+      } else {
+
+        if (!mysqli_select_db($dbconnect, DB_NAME)) {
+
+          if (!mysqli_query($dbconnect, "CREATE DATABASE DB_NAME")) {
+            die('Could not create database named DB_NAME ' . mysqli_error($dbconnect));
           }
         }
       }
+      return true;
     } catch (Exception $PDOException) {
-      echo $PDOException->getMessage();
+      die ($PDOException->getMessage());
+
+    }
+  }
+
+  public static function dbconnectionString(){
+    if (self::dbconnect())
+    {
+      return mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    }
+  }
+
+  public static function dsn() {
+    if (self::dbconnect())
+    {
+      $dsn = "mysql:host=".DB_HOST.":".DB_PORT.";dbname=".DB_NAME.";charset=UTF8";
+      try {
+        $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+
+        $conn = new PDO($dsn, DB_USER, DB_PASSWORD, $options);
+
+        if ($conn) {
+          return $conn;
+        }
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+      }
     }
   }
 
