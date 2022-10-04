@@ -1,6 +1,5 @@
 <?php
 require "../services/EmailService.php";
-require "../model/Email.php";
 
 class FormController
 {
@@ -14,7 +13,7 @@ class FormController
   public function addNewEmail($request)
   {
 
-    $email = new Email();
+    $email = new EmailEntity();
     $email->setEmail($request['email']);
     var_dump($email);
     // if email valid
