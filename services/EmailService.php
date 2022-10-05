@@ -26,14 +26,27 @@ class EmailService implements DBServiceRepository
         $stmt = $this->connectionString->prepare($sql);
         $stmt->bindParam(":emailAddress", $address);
         if ($stmt->execute()) {
-
-        } else {
-          die("Could not insert data. " . $this->connectionString->errorInfo());
+          $response = [
+              'message' => "Email registered successfully",
+          ];
+//          var_dump($response);
+          return $response;
         }
       }
 
     } catch (Exception $exception) {
-      echo "Error inserting data." . $exception->getMessage();
+      if ($exception->getCode() == 23000) {
+        $message = [
+            'error_code' => $exception->getCode(),
+            'error' => $email->getEmail() . ' is already registered'
+        ];
+      } else {
+        $message = [
+            'error_code' => $exception->getCode(),
+            'error' => $exception->getMessage()
+        ];
+      }
+      return $message;
     }
 
   }

@@ -14,12 +14,21 @@ class FormController
 
   public function addNewEmail($request)
   {
-
     $email = new EmailEntity();
-    $email->setEmail($request['email']);
-    // if email valid
-    $this->emailService->save($email);
 
+    //Validating
+    if (filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
+
+      $email->setEmail($request['email']);
+      $result = ($this->emailService->save($email));
+      return $result;
+
+    } else {
+      $response = [
+          'error' => "Email is not valid",
+      ];
+      return $response;
+    }
 
   }
 }

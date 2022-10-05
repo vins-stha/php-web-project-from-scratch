@@ -1,10 +1,17 @@
 <?php
 require "../Controller/FormController.php";
 //require_once "";
-
-if (isset($_POST['email'])) {
+$error = false;
+if (isset($_POST['submit']) && isset($_POST['email'])) {
   $formHandler = new FormController();
-  $formHandler->addNewEmail($_POST);
+
+  $result = $formHandler->addNewEmail($_POST);
+
+  if (array_key_exists('message', $result)) {
+  } else {
+    $error = true;
+  }
+
 }
 
 ?>
@@ -28,7 +35,7 @@ if (isset($_POST['email'])) {
 <body>
 <div class="container">
   <header>
-    <h1><?=getenv('application_name')?></h1>
+    <h1><?= getenv('application_name') ?></h1>
   </header>
   <section>
     <div id="container_demo">
@@ -39,12 +46,17 @@ if (isset($_POST['email'])) {
           <h1>Register your email </h1>
           <p>
             <label for="email" class="uname"> Your Email </label>
-            <input id="email" type="email" class="input-box" name="email"/>
+            <input id="email" type="email" class="input-box" name="email" required/>
 
           </p>
           <p class="button">
-            <input type="submit" name="welcome" value="Register"/>
+            <input type="submit" name="submit" value="Register"/>
           </p>
+          <?php if ($error) : ?>
+            <span><?= $result['error']; ?></span>
+          <?php else: ?>
+            <span><?= $result['message']; ?></span>
+          <?php endif; ?>
 
         </form>
 
