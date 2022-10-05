@@ -41,24 +41,25 @@ if (isset($_POST['submit']) && isset($_POST['email'])) {
     <div id="container_demo">
 
       <div id="wrapper">
+        <div class="form-container">
+          <form name="regiser" method="post" action="index.php">
+            <h1>Register your email </h1>
+            <p>
+              <label for="email" class="label"> Your Email </label>
+              <input id="email" type="email" class="input-box" name="email" required/>
 
-        <form name="login" method="post" action="index.php">
-          <h1>Register your email </h1>
-          <p>
-            <label for="email" class="uname"> Your Email </label>
-            <input id="email" type="email" class="input-box" name="email" required/>
+            </p>
+            <p class="button">
+              <input type="submit" name="submit" value="Register" class="submit-button"/>
+            </p>
+            <?php if ($error) : ?>
+              <span class="error"><?= $result['error']; ?></span>
+            <?php else: ?>
+              <span class="success"><?= $result['message']; ?></span>
+            <?php endif; ?>
 
-          </p>
-          <p class="button">
-            <input type="submit" name="submit" value="Register"/>
-          </p>
-          <?php if ($error) : ?>
-            <span><?= $result['error']; ?></span>
-          <?php else: ?>
-            <span><?= $result['message']; ?></span>
-          <?php endif; ?>
-
-        </form>
+          </form>
+        </div>
 
       </div>
     </div>
@@ -66,34 +67,3 @@ if (isset($_POST['submit']) && isset($_POST['email'])) {
 </div>
 </body>
 </html>
-
-<script>
-  function handleSubmit() {
-    // alert();
-
-  }
-
-  // $(document).ready(function ()
-  // {
-  //   $("form").submit(function (event) {
-  //
-  //     event.preventDefault();
-  //
-  //     let formData = {
-  //       email: $("#email").val()
-  //     };
-  //     console.log('email=>', formData)
-  //     $.ajax({
-  //       type: "POST",
-  //       url: "index.php",
-  //       data: formData,
-  //       dataType: "json",
-  //       encode: true
-  //     })
-  //         .done(function (data) {
-  //           console.log('DAta=', data)
-  //         });
-  //   })
-  //
-  // });
-</script>
