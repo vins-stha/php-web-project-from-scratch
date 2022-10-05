@@ -18,21 +18,17 @@ class EmailService implements DBServiceRepository
   {
     // TODO: Implement save() method.
     $address = $email->getEmail();
-    var_dump("Email address=".$address);
-    $sql = 'INSERT INTO `userEmails`(`emailAddress`) 
-            VALUES (?)';
+
     try {
-      var_dump(self::createTableIfNotExist(TABLE_NAME));
       if (self::createTableIfNotExist(TABLE_NAME)) {
-        $sql = " INSERT INTO TABLE_NAME (`emailAddress`)
+        $sql = " INSERT INTO " . TABLE_NAME . " (`emailAddress`)
                 VALUES (:emailAddress);";
         $stmt = $this->connectionString->prepare($sql);
-        $stmt->bindParam(":emailAddress",$address);
-        var_dump($stmt->execute());
+        $stmt->bindParam(":emailAddress", $address);
         if ($stmt->execute()) {
-          echo "Inserted data  " . $stmt->execute();
+
         } else {
-          die("Could not insert" . $this->connectionString->errorInfo());
+          die("Could not insert data. " . $this->connectionString->errorInfo());
         }
       }
 
@@ -44,11 +40,10 @@ class EmailService implements DBServiceRepository
 
   public function createTableIfNotExist($tableName)
   {
-    var_dump("tablename=" . $tableName);
     // TODO: Create table
     $sql = "CREATE TABLE IF NOT EXISTS `$tableName` (
                 `id` BIGINT NOT NULL AUTO_INCREMENT, 
-                `emailAddress` VARCHAR(255) NOT NULL , 
+                `emailAddress` VARCHAR(255) NOT NULL UNIQUE , 
                 `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 PRIMARY KEY (`id`)) ENGINE=MyISAM";
     $stmt = $this->connectionString->prepare($sql);

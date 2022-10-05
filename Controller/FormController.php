@@ -4,9 +4,11 @@ require "../services/EmailService.php";
 class FormController
 {
   private $emailService;
+  private $dbconn;
 
   function __construct()
   {
+    $this->dbconn = DBConnect::dbconnect();
     $this->emailService = new EmailService();
   }
 
@@ -15,7 +17,6 @@ class FormController
 
     $email = new EmailEntity();
     $email->setEmail($request['email']);
-    var_dump($email);
     // if email valid
     $this->emailService->save($email);
 
