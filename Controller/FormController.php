@@ -1,25 +1,34 @@
 <?php
 require "../services/EmailService.php";
-require "../model/Email.php";
 
 class FormController
 {
   private $emailService;
+  private $dbconn;
 
   function __construct()
   {
+    $this->dbconn = DBConnect::dbconnect();
     $this->emailService = new EmailService();
   }
 
   public function addNewEmail($request)
   {
+    $email = new EmailEntity();
 
-    $email = new Email();
-    $email->setEmail($request['email']);
-    var_dump($email);
-    // if email valid
-    $this->emailService->save($email);
+    //Validating
+    if (filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
 
+      $email->setEmail($request['email']);
+      $result = ($this->emailService->save($email));
+      return $result;
+
+    } else {
+      $response = [
+          'error' => "Email is not valid",
+      ];
+      return $response;
+    }
 
   }
 }

@@ -1,8 +1,17 @@
 <?php
 require "../Controller/FormController.php";
-if (isset($_POST['email'])) {
+//require_once "";
+$error = false;
+if (isset($_POST['submit']) && isset($_POST['email'])) {
   $formHandler = new FormController();
-  $formHandler->addNewEmail($_POST);
+
+  $result = $formHandler->addNewEmail($_POST);
+
+  if (array_key_exists('message', $result)) {
+  } else {
+    $error = true;
+  }
+
 }
 
 ?>
@@ -26,25 +35,31 @@ if (isset($_POST['email'])) {
 <body>
 <div class="container">
   <header>
-    <h1><?=getenv('application_name')?></h1>
+    <h1><?= getenv('application_name') ?></h1>
   </header>
   <section>
     <div id="container_demo">
 
       <div id="wrapper">
+        <div class="form-container">
+          <form name="regiser" method="post" action="index.php">
+            <h1>Register your email </h1>
+            <p>
+              <label for="email" class="label"> Your Email </label>
+              <input id="email" type="email" class="input-box" name="email" required/>
 
-        <form name="login" method="post" action="index.php">
-          <h1>Register your email </h1>
-          <p>
-            <label for="email" class="uname"> Your Email </label>
-            <input id="email" type="email" class="input-box" name="email"/>
+            </p>
+            <p class="button">
+              <input type="submit" name="submit" value="Register" class="submit-button"/>
+            </p>
+            <?php if ($error) : ?>
+              <span class="error"><?= $result['error']; ?></span>
+            <?php else: ?>
+              <span class="success"><?= $result['message']; ?></span>
+            <?php endif; ?>
 
-          </p>
-          <p class="button">
-            <input type="submit" name="welcome" value="Register"/>
-          </p>
-
-        </form>
+          </form>
+        </div>
 
       </div>
     </div>
@@ -52,34 +67,3 @@ if (isset($_POST['email'])) {
 </div>
 </body>
 </html>
-
-<script>
-  function handleSubmit() {
-    // alert();
-
-  }
-
-  // $(document).ready(function ()
-  // {
-  //   $("form").submit(function (event) {
-  //
-  //     event.preventDefault();
-  //
-  //     let formData = {
-  //       email: $("#email").val()
-  //     };
-  //     console.log('email=>', formData)
-  //     $.ajax({
-  //       type: "POST",
-  //       url: "index.php",
-  //       data: formData,
-  //       dataType: "json",
-  //       encode: true
-  //     })
-  //         .done(function (data) {
-  //           console.log('DAta=', data)
-  //         });
-  //   })
-  //
-  // });
-</script>

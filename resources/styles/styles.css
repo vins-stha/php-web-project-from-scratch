@@ -5,3 +5,29 @@ html, body {
   background-color: #212121;
   color: orange;
 }
+
+.form-container {
+  width: 50%;
+  text-align: center;
+  margin: 10rem auto;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #181818;
+}
+.label {
+  padding: 1rem;
+}
+
+.submit-button, .input-box {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}

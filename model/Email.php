@@ -1,7 +1,7 @@
 <?php
 
 
-class Email
+class EmailEntity
 {
   private $email;
 

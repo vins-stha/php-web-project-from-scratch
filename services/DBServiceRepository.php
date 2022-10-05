@@ -1,5 +1,6 @@
 <?php
-require_once "../model/Email.php";
+include "../model/Email.php";
  interface DBServiceRepository {
-  public function save(Email $email);
+  public function save(EmailEntity $email);
+  public function createTableIfNotExist($tableName);
 }
