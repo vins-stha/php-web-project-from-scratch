@@ -25,11 +25,6 @@ if (isset($_POST['submit']) && isset($_POST['email'])) {
   <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class"/>
   <link rel="shortcut icon" href="../favicon.ico">
   <link rel="stylesheet" type="text/css" href="../resources/styles/styles.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-          integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer">
-
-  </script>
 
 </head>
 <body>
