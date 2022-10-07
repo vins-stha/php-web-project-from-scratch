@@ -11,5 +11,7 @@
     -   database password
     -   database name
     -   table name
-    
+ -   the application can be accessed with following url for localhost 
+ 
+                http://localhost/webproject/views/
     
