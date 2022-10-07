@@ -32,7 +32,7 @@ if (isset($_POST['submit']) && isset($_POST['email'])) {
 <body>
 <div class="container">
   <header>
-    <h1><?= getenv('application_name') ?></h1>
+    <h1>PHP Web project</h1>
   </header>
   <section>
     <div id="container_demo">

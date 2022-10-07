@@ -57,7 +57,7 @@ class DBConnect
           return $conn;
         }
       } catch (PDOException $e) {
-        echo "Could not connect =>".$e->getMessage(), $e->getCode();
+        echo "Could not connect to database. ".$e->getMessage(), $e->getCode();
       }
     }
   }
