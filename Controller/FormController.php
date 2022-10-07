@@ -8,7 +8,15 @@ class FormController
 
   function __construct()
   {
+    // establish connection
     $this->dbconn = DBConnect::dbconnect();
+//    if(!$this->dbconn)
+//    {
+//      $response = [
+//          'message' => "Database connection error. Please check your config variables",
+//      ];
+//      return $response;
+//    }
     $this->emailService = new EmailService();
   }
 
