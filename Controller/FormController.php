@@ -8,7 +8,9 @@ class FormController
 
   function __construct()
   {
+    // establish connection
     $this->dbconn = DBConnect::dbconnect();
+
     $this->emailService = new EmailService();
   }
 

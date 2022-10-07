@@ -48,7 +48,6 @@ class EmailService implements DBServiceRepository
       }
       return $message;
     }
-
   }
 
   public function createTableIfNotExist($tableName)

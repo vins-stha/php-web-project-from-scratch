@@ -15,7 +15,6 @@ class DBConnect
 
     try {
       $dbconnect = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
-
       if (mysqli_connect_errno()) {
         error_log('Connection error: ' . $dbconnect->connect_errno);
         return false;
@@ -58,7 +57,7 @@ class DBConnect
           return $conn;
         }
       } catch (PDOException $e) {
-        echo $e->getMessage();
+        echo "Could not connect to database. ".$e->getMessage(), $e->getCode();
       }
     }
   }

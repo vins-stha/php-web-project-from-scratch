@@ -2,7 +2,9 @@
 require "../Controller/FormController.php";
 //require_once "";
 $error = false;
+$formSubmitted=false;
 if (isset($_POST['submit']) && isset($_POST['email'])) {
+  $formSubmitted=true;
   $formHandler = new FormController();
 
   $result = $formHandler->addNewEmail($_POST);
@@ -30,7 +32,7 @@ if (isset($_POST['submit']) && isset($_POST['email'])) {
 <body>
 <div class="container">
   <header>
-    <h1><?= getenv('application_name') ?></h1>
+    <h1>PHP Web project</h1>
   </header>
   <section>
     <div id="container_demo">
@@ -47,12 +49,13 @@ if (isset($_POST['submit']) && isset($_POST['email'])) {
             <p class="button">
               <input type="submit" name="submit" value="Register" class="submit-button"/>
             </p>
+            <?php if($formSubmitted):?>
             <?php if ($error) : ?>
               <span class="error"><?= $result['error']; ?></span>
             <?php else: ?>
               <span class="success"><?= $result['message']; ?></span>
             <?php endif; ?>
-
+            <?php endif; ?>
           </form>
         </div>
 
